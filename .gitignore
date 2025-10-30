@@ -1,2 +1,16 @@
-dist/
+# Dependencies
 node_modules/
+
+# Build output
+dist/
+
+# Rust/Cargo build artifacts
+wasm/target/
+wasm/Cargo.lock
+
+# WASM build output (generated files)
+public/wasm/wasm_visuals_bg.wasm
+public/wasm/wasm_visuals_bg.wasm.d.ts
+
+# Note: Keep public/wasm/wasm_visuals.js as it contains the JS fallback
+# Only the _bg.wasm file and its TypeScript declarations are build artifacts
