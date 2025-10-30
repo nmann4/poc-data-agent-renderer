@@ -139,9 +139,38 @@ impl GameOfLife {
         let size = width * height;
         let mut cells = vec![false; size];
         
-        // Create a random pattern
-        for i in 0..size {
-            cells[i] = (i * 7919) % 3 == 0;
+        // Start with some interesting stable patterns and oscillators
+        let cx = width / 2;
+        let cy = height / 2;
+        
+        // Glider in top-left
+        let patterns = [
+            (20, 20), (21, 20), (22, 20), (22, 21), (21, 22),
+            // Pulsar pattern in center
+            (cx - 6, cy - 4), (cx - 6, cy - 3), (cx - 6, cy - 2),
+            (cx - 6, cy + 2), (cx - 6, cy + 3), (cx - 6, cy + 4),
+            (cx + 6, cy - 4), (cx + 6, cy - 3), (cx + 6, cy - 2),
+            (cx + 6, cy + 2), (cx + 6, cy + 3), (cx + 6, cy + 4),
+            (cx - 4, cy - 6), (cx - 3, cy - 6), (cx - 2, cy - 6),
+            (cx + 2, cy - 6), (cx + 3, cy - 6), (cx + 4, cy - 6),
+            (cx - 4, cy + 6), (cx - 3, cy + 6), (cx - 2, cy + 6),
+            (cx + 2, cy + 6), (cx + 3, cy + 6), (cx + 4, cy + 6),
+            (cx - 4, cy - 1), (cx - 3, cy - 1), (cx - 2, cy - 1),
+            (cx + 2, cy - 1), (cx + 3, cy - 1), (cx + 4, cy - 1),
+            (cx - 4, cy + 1), (cx - 3, cy + 1), (cx - 2, cy + 1),
+            (cx + 2, cy + 1), (cx + 3, cy + 1), (cx + 4, cy + 1),
+            (cx - 1, cy - 4), (cx - 1, cy - 3), (cx - 1, cy - 2),
+            (cx - 1, cy + 2), (cx - 1, cy + 3), (cx - 1, cy + 4),
+            (cx + 1, cy - 4), (cx + 1, cy - 3), (cx + 1, cy - 2),
+            (cx + 1, cy + 2), (cx + 1, cy + 3), (cx + 1, cy + 4),
+            // Blinker in bottom-right
+            (width - 30, height - 30), (width - 29, height - 30), (width - 28, height - 30),
+        ];
+        
+        for &(x, y) in &patterns {
+            if x < width && y < height {
+                cells[y * width + x] = true;
+            }
         }
         
         let next_cells = cells.clone();
