@@ -83,6 +83,8 @@ const App: React.FC = () => {
         flexDirection: "column",
         backgroundColor: "#faf9f8",
         color: "#323130",
+        border: "1px solid #c8c6c4",
+        boxShadow: "0 0 0 1px rgba(0,0,0,0.05)",
       }}
     >
       <header
